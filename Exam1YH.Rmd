@@ -1,0 +1,49 @@
+---
+title: '2'
+output: html_document
+date: "2022-10-17"
+---
+```{r}
+# use the pacman package that automatically checks for packages, installs them if not found, and opens the associated library onces installed
+pacman::p_load(dplyr, readr)
+# read in csv file
+titanic_csv <-
+ read_csv(
+   "https://raw.githubusercontent.com/kijohnson/Data/main/titanic.csv"
+   )
+```
+
+
+```{r}
+ # first check class of Pclass
+class(titanic_csv$Pclass)
+```
+
+```{r}
+ # convert Pclass variable to factor using the as.factor function
+titanic_csv$Pclass<-as.factor(titanic_csv$Pclass)
+```
+
+```{r}
+ # check the class of the new factor Pclass variable
+class(titanic_csv$Pclass)
+```
+
+```{r}
+# group Pclass variable using group_by function and get median of age by summarize
+titanic_csv %>% 
+  group_by(Pclass)  %>%
+  summarize(Median = median(Age))
+```
+
+```{r}
+# using ggplot to generate a boxplot
+library (ggplot2)
+ggplot(data = titanic_csv, aes(x = Pclass, y = Age)) +
+  geom_boxplot() +
+  labs(x = "Passenger Class", y = "Age",  title = "Boxplot")
+```
+
+
+
+
