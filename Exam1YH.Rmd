@@ -44,6 +44,14 @@ ggplot(data = titanic_csv, aes(x = Pclass, y = Age)) +
   labs(x = "Passenger Class", y = "Age",  title = "Boxplot")
 ```
 
+```{r}
+titanic_csv %>% 
+  group_by(Pclass)  %>%
+  summarize(nfem= length(Sex[Sex=="female"]), # number females per group
+            nmale= length(Sex[Sex=="male"]), # number of males per group
+            percentmale= nmale/(nfem+nmale), # percent males by group
+            percentfem= nfem/(nfem+nmale)) # percent females by group
+```
 
 
 
